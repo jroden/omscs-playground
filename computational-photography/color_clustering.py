@@ -78,12 +78,12 @@ class Node:
                 left_colors.append(self.cn[xs_i,:])
                 left_indices.append(self.cn_i[xs_i,:])
             else:
-                right_colors.append(self.cn[xs_i,:])    # not hitting this for some reason, only split into left_colors
+                right_colors.append(self.cn[xs_i,:])
                 right_indices.append(self.cn_i[xs_i,:])
-        left_color_arr = np.zeros((len(left_colors),3),np.uint16)       # TODO verify uint16 is good
-        right_color_arr = np.zeros((len(right_colors),3),np.uint16)     # TODO verify uint16 is good
-        left_color_indices = np.zeros((len(left_colors),2),np.uint8)
-        right_color_indices = np.zeros((len(right_colors),2),np.uint8)
+        left_color_arr = np.zeros((len(left_colors),3),np.uint16)
+        right_color_arr = np.zeros((len(right_colors),3),np.uint16)
+        left_color_indices = np.zeros((len(left_colors),2),np.uint16)
+        right_color_indices = np.zeros((len(right_colors),2),np.uint16)
         for i in range(0,len(left_colors)):
             left_color_arr[i,:] = left_colors[i]
             left_color_indices[i,:] = left_indices[i]
@@ -191,9 +191,9 @@ def quantize_colors(neighborhood,m,weights=None):
 
 
 # testing
-img = cv2.imread("computational-photography/images/input/smoke.jpg")
+img = cv2.imread("images/input/rb.jpg")
 quantized_color_indices = quantize_colors(img,2)
-for color_indices in quantized_color_indices:   # TODO debug incorrect cluster scope & contents
-    color_indices_extended = np.repeat(color_indices[:, :, np.newaxis], 3, axis=2)
+for i in range(0,len(quantized_color_indices)):
+    color_indices_extended = np.repeat(quantized_color_indices[i][:, :, np.newaxis], 3, axis=2)
     quantized_color_img = np.where(color_indices_extended,img,(0,0,0))
-    cv2.imwrite("test.png",quantized_color_img)
+    cv2.imwrite("images/output/color_cluster_{}.png".format(i),quantized_color_img)
