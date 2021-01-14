@@ -62,6 +62,6 @@ def shift_array(arr):
         
 
 # apply canny edge detector
-img = cv2.imread("images/input/tech-tower.jpg")
+img = cv2.imread("input/tech-tower.jpg")
 canny_res = canny(img,(5,5),30,80)
-cv2.imwrite("images/output/tech-tower-canny.jpg",canny_res)
+cv2.imwrite("output/tech-tower-canny.jpg",canny_res)

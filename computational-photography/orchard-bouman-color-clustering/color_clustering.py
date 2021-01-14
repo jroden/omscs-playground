@@ -191,9 +191,9 @@ def quantize_colors(neighborhood,m,weights=None):
 
 
 # testing
-img = cv2.imread("images/input/ball-pit.jpg")
+img = cv2.imread("input/ball-pit.jpg")
 quantized_color_indices = quantize_colors(img,5)
 for i in range(0,len(quantized_color_indices)):
     color_indices_extended = np.repeat(quantized_color_indices[i][:, :, np.newaxis], 3, axis=2)
     quantized_color_img = np.where(color_indices_extended,img,(0,0,0))
-    cv2.imwrite("images/output/color_cluster_{}.png".format(i),quantized_color_img)
+    cv2.imwrite("output/ball-pit-cluster-{}.png".format(i),quantized_color_img)
